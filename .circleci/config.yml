@@ -10,7 +10,7 @@ jobs:
   build:
     executor:
       name: win/default
-      shell: powershell.exe
+      shell: bash.exe
     steps:
       - checkout
       - run: go main.go
