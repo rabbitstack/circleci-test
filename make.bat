@@ -8,5 +8,5 @@ if "%~1"=="fmt" goto fmt
 if "%~1"=="clean" goto clean
 
 :build
-go build -o main.exe main.go
+go build -ldflags "-s -w -X main.version=%VERSION% -X main.commit=%COMMIT%" -o main.exe main.go
 goto :EOF
