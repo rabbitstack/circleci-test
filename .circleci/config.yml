@@ -8,7 +8,6 @@ orbs:
   
 environment:
   VERSION: 1.0.0
-  COMMIT: %CIRCLE_SHA1%
 
 jobs:
   build:
