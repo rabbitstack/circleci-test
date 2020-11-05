@@ -7,8 +7,8 @@ orbs:
   win: circleci/windows@2.2.0
   
 environment:
-  VERSION=1.0.0
-  COMMIT=%CIRCLE_SHA1%
+  VERSION: 1.0.0
+  COMMIT: %CIRCLE_SHA1%
 
 jobs:
   build:
