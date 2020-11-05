@@ -13,4 +13,4 @@ jobs:
       shell: bash.exe
     steps:
       - checkout
-      - run: go build main.go
+      - run: make build
