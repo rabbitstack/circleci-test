@@ -18,3 +18,6 @@ jobs:
       - checkout
       - run: make build
       - run: C:\Users\circleci\project\main.exe
+      - run:
+          name: Package
+          command: make pkg
