@@ -15,4 +15,6 @@ goto :EOF
 :pkg
 echo Downloading python...
 powershell -Command "$progressPreference = 'silentlyContinue'; Invoke-WebRequest https://www.python.org/ftp/python/3.9.0/python-3.9.0-embed-amd64.zip -OutFile c:\python.zip"
+powershell -Command "Expand-Archive c:\python.zip -DestinationPath c:\python"
+dir C:\python
 goto :EOF
