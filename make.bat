@@ -13,7 +13,6 @@ go build -ldflags "-s -w -X main.version=%VERSION% -X main.commit=%CIRCLE_SHA1%"
 goto :EOF
 
 :pkg
-powershell -Command "$ProgressPreference = SilentlyContinue"
 echo Downloading python...
-powershell -Command "Invoke-WebRequest https://www.python.org/ftp/python/3.9.0/python-3.9.0-embed-amd64.zip -OutFile c:\python.zip"
+powershell -Command "$progressPreference = 'silentlyContinue'; Invoke-WebRequest https://www.python.org/ftp/python/3.9.0/python-3.9.0-embed-amd64.zip -OutFile c:\python.zip"
 goto :EOF
