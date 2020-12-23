@@ -41,7 +41,7 @@ jobs:
       - name: ls
         shell: bash
         run: |
-          ls -l C:/hostedtoolcache/windows/Python/3.7.9
+          ls -l C:/hostedtoolcache/windows/Python/3.7.9/x64
           which python
       - name: Build
         shell: bash
