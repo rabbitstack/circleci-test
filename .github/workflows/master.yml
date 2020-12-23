@@ -42,6 +42,7 @@ jobs:
         shell: bash
         run: |
           ls -l C:/
+          which python
       - name: Build
         shell: bash
         run: |
