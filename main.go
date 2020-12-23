@@ -2,7 +2,6 @@ package main
 
 /*
 #cgo pkg-config: python-37
-
 */
 import "C"
 
