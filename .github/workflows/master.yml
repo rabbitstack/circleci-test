@@ -22,6 +22,7 @@ jobs:
         uses: msys2/setup-msys2@v2
         with:
           install: >-
+            base-devel
             mingw-w64-x86_64-gcc
             git
       - shell: msys2 {0}           
