@@ -18,26 +18,26 @@ jobs:
         uses: actions/setup-go@v2
         with:
            go-version: 1.15.x
-      - name: Install libyara
-        uses: msys2/setup-msys2@v2
-        with:
-          install: >-
-            base-devel
-            mingw-w64-x86_64-gcc
-            git
-      - shell: msys2 {0}           
-        run: |
-            git clone https://github.com/VirusTotal/yara.git
-            cd yara
-            autoreconf -fiv
-            ./configure --host=x86_64-w64-mingw32
-            make install
+#       - name: Install libyara
+#         uses: msys2/setup-msys2@v2
+#         with:
+#           install: >-
+#             base-devel
+#             mingw-w64-x86_64-gcc
+#             git
+#       - shell: msys2 {0}           
+#         run: |
+#             git clone https://github.com/VirusTotal/yara.git
+#             cd yara
+#             autoreconf -fiv
+#             ./configure --host=x86_64-w64-mingw32
+#             make install
       - name: Checkout
         uses: actions/checkout@v2
       - name: Build
         shell: bash
         run: |
-          cpan Pod::Usage
+          cpan CPAN::Author Pod::Usage
           export PKG_CONFIG_PATH=$(pwd)
           go build -ldflags "-s -w -X main.version=$VERSION -X main.commit=$GITHUB_SHA" -o main.exe main.go
           ./main.exe
