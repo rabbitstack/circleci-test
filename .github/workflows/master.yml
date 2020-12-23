@@ -20,4 +20,5 @@ jobs:
       - name: Build
         shell: cmd
         run: |
-          make 
+          make build
+          main.exe
