@@ -38,6 +38,7 @@ jobs:
         shell: bash
         run: |
           export PATH="c/msys64/mingw64/bin:/c/Strawberry/perl/bin:$PATH"
+          export CC="gcc"
           export PKG_CONFIG_PATH=$(pwd)
           go build -ldflags "-s -w -X main.version=$VERSION -X main.commit=$GITHUB_SHA" -o main.exe main.go
           ./main.exe
