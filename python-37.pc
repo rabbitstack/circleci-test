@@ -1,4 +1,4 @@
-prefix=C:/hostedtoolcache/windows/Python/3.7.9/
+prefix=C:/hostedtoolcache/windows/Python/3.7.9/x64
 exec_prefix=${prefix}
 libdir=${exec_prefix}/libs
 includedir=${prefix}/include
