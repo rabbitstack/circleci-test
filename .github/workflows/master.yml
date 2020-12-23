@@ -38,16 +38,11 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: 3.7
-      - name: ls
-        shell: bash
-        run: |
-          ls -l C:/hostedtoolcache/windows/Python/3.7.9/x64
-          which python
       - name: Build
         shell: bash
         run: |
+          ln -s C:/hostedtoolcache/windows/Python/3.7.9/x64 C:/Python37
           export PATH="c/msys64/mingw64/bin:/c/Strawberry/perl/bin:$PATH"
-          export CC="gcc"
           export PKG_CONFIG_PATH=$(pwd)
           go build -ldflags "-s -w -X main.version=$VERSION -X main.commit=$GITHUB_SHA" -o main.exe main.go
           ./main.exe
