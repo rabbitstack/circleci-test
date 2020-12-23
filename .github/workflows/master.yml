@@ -20,6 +20,11 @@ jobs:
            go-version: 1.15.x
       - name: Install libyara
         uses: msys2/setup-msys2@v2
+        with:
+          update: true
+          install: >-
+            base-devel
+            git
       - shell: msys2 {0}           
         run: |
             git clone https://github.com/VirusTotal/yara.git
