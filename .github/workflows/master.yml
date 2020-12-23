@@ -29,12 +29,6 @@ jobs:
             base-devel
             mingw-w64-x86_64-gcc
             git
-      - name: Cache libyara
-        uses: actions/cache@v2
-        with: 
-          path: |
-            **/mingw64/lib/libyara.a
-          key: ${{ runner.os }}-${{ hashFiles('main.go') }}
       - name: Install libyara
         shell: msys2 {0}           
         run: |
@@ -42,7 +36,13 @@ jobs:
             cd yara
             autoreconf -fiv
             ./configure --host=x86_64-w64-mingw32
-            make install   
+            make install
+      - name: Cache libyara
+        uses: actions/cache@v2
+        with: 
+          path: |
+            **/mingw64/lib/libyara.a
+          key: ${{ runner.os }}-${{ hashFiles('main.go') }}
       - name: Checkout
         uses: actions/checkout@v2
       - name: Build
