@@ -49,5 +49,5 @@ jobs:
       - name: Test
         shell: bash
         run: |
-          go test -v -race ./...
+          go version
           
