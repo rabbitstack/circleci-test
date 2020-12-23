@@ -41,7 +41,7 @@ jobs:
         uses: actions/cache@v2
         with: 
           path: |
-            **/mingw64/lib/libyara.a
+            C:/**/mingw64/lib/libyara.a
           key: ${{ runner.os }}-${{ hashFiles('main.go') }}
       - name: Checkout
         uses: actions/checkout@v2
