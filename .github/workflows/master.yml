@@ -37,7 +37,7 @@ jobs:
       - name: ls
         shell: bash
         run: |
-          ls -l c
+          ls -l C:/
       - name: Build
         shell: bash
         run: |
