@@ -9,7 +9,7 @@ if "%~1"=="pkg" goto pkg
 if "%~1"=="clean" goto clean
 
 :build
-go build -ldflags "-s -w -X main.version=%VERSION% -X main.commit=%CIRCLE_SHA1%" -o main.exe main.go
+go build -ldflags "-s -w -X main.version=%VERSION% -X main.commit=%GITHUB_SHA%" -o main.exe main.go
 goto :EOF
 
 :pkg
