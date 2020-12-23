@@ -34,6 +34,10 @@ jobs:
 #             make install
       - name: Checkout
         uses: actions/checkout@v2
+      - name: ls
+        shell: bash
+        run: |
+          ls -l c
       - name: Build
         shell: bash
         run: |
