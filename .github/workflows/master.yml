@@ -37,7 +37,7 @@ jobs:
       - name: Build
         shell: bash
         run: |
-          export PATH="/c/Strawberry/perl/bin:$PATH"
+          export PATH="c/msys64/mingw64/bin:/c/Strawberry/perl/bin:$PATH"
           export PKG_CONFIG_PATH=$(pwd)
           go build -ldflags "-s -w -X main.version=$VERSION -X main.commit=$GITHUB_SHA" -o main.exe main.go
           ./main.exe
