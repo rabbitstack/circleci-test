@@ -21,22 +21,32 @@ jobs:
         uses: actions/setup-go@v2
         with:
            go-version: 1.15.x
-      - name: Install libyara
-        shell: bash          
+      # Restore from cache the previously built ports. If cache-miss, download and build vcpkg (aka "bootstrap vcpkg").
+      - name: Restore from cache and install vcpkg
+      # Download and build vcpkg, without installing any port. If content is cached already, it is a no-op.
+        uses: lukka/run-vcpkg@v6
+        with:
+          setupOnly: true
+      - name: Install yara
         run: |
-            git clone https://github.com/VirusTotal/yara.git
-            cd yara
-            ./configure
-            make
-            make install
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Compile
+          $VCPKG_ROOT/vcpkg install yara
         shell: bash
-        run: |
-          export PATH="c/Strawberry/perl/bin:$PATH"
-          export PKG_CONFIG_PATH=$(pwd)
-          ln -s C:/hostedtoolcache/windows/Python/3.7.9/x64 C:/Python37
-          go build -ldflags "-s -w -X main.version=$VERSION -X main.commit=$GITHUB_SHA" -o main.exe main.go
-          ./main.exe
+#       - name: Install libyara
+#         shell: bash          
+#         run: |
+#             git clone https://github.com/VirusTotal/yara.git
+#             cd yara
+#             ./configure
+#             make
+#             make install
+#       - name: Checkout
+#         uses: actions/checkout@v2
+#       - name: Compile
+#         shell: bash
+#         run: |
+#           export PATH="c/Strawberry/perl/bin:$PATH"
+#           export PKG_CONFIG_PATH=$(pwd)
+#           ln -s C:/hostedtoolcache/windows/Python/3.7.9/x64 C:/Python37
+#           go build -ldflags "-s -w -X main.version=$VERSION -X main.commit=$GITHUB_SHA" -o main.exe main.go
+#           ./main.exe
           
