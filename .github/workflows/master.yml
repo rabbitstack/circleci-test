@@ -26,7 +26,9 @@ jobs:
       # Download and build vcpkg, without installing any port. If content is cached already, it is a no-op.
         uses: lukka/run-vcpkg@v6
         with:
-          setupOnly: true
+           # Location of the vcpkg as submodule of the repository.
+           vcpkgDirectory: '${{ github.workspace }}/vcpkg'
+           setupOnly: true
       - name: Install yara
         run: |
           $VCPKG_ROOT/vcpkg install yara
