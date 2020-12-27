@@ -58,5 +58,5 @@ jobs:
         shell: bash
         run: |
           go get -v -u golang.org/x/lint/golint
-          go list ./... | xargs -L1 $(USERPROFILE)/go/bin/golint -set_exit_status
+          go list ./... | xargs -L1 $USERPROFILE/go/bin/golint -set_exit_status
           
