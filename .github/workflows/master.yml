@@ -21,6 +21,16 @@ jobs:
         uses: actions/setup-go@v2
         with:
            go-version: 1.15.x
+#       - name: Install libyara
+#         shell: bash          
+#         run: |
+#             git clone https://github.com/VirusTotal/yara.git
+#             cd yara
+#             ./configure
+#             make
+#             make install
+      - name: Checkout
+        uses: actions/checkout@v2
       # Restore from cache the previously built ports. If cache-miss, download and build vcpkg (aka "bootstrap vcpkg").
       - name: Restore from cache and install vcpkg
       # Download and build vcpkg, without installing any port. If content is cached already, it is a no-op.
@@ -33,16 +43,6 @@ jobs:
         run: |
           $VCPKG_ROOT/vcpkg install yara
         shell: bash
-#       - name: Install libyara
-#         shell: bash          
-#         run: |
-#             git clone https://github.com/VirusTotal/yara.git
-#             cd yara
-#             ./configure
-#             make
-#             make install
-#       - name: Checkout
-#         uses: actions/checkout@v2
 #       - name: Compile
 #         shell: bash
 #         run: |
