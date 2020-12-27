@@ -39,27 +39,14 @@ jobs:
 #             make install
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Install pkgconfig
-        shell: bash
-        run: choco install pkgconfiglite
+#       - name: Install pkgconfig
+#         shell: bash
+#         run: choco install pkgconfiglite
       - name: Compile
         shell: bash
         run: |
-          export PATH="c/msys64/mingw64/bin:/c/Strawberry/perl/bin:$PATH"
           export PKG_CONFIG_PATH=$(pwd)
           ln -s C:/hostedtoolcache/windows/Python/3.7.9/x64 C:/Python37
           go build -ldflags "-s -w -X main.version=$VERSION -X main.commit=$GITHUB_SHA" -o main.exe main.go
           ./main.exe
-      - name: Test
-        shell: bash
-        run: |
-          export PATH="c/msys64/mingw64/bin:/c/Strawberry/perl/bin:$PATH"
-          export PKG_CONFIG_PATH=$(pwd)
-          ln -s C:/hostedtoolcache/windows/Python/3.7.9/x64 C:/Python37
-          go test -v -race ./...
-      - name: Lint
-        shell: bash
-        run: |
-          go get -v -u golang.org/x/lint/golint
-          go list ./... | xargs -L1 $USERPROFILE/go/bin/golint -set_exit_status
           
