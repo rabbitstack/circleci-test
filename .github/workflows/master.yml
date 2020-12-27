@@ -39,6 +39,9 @@ jobs:
 #             make install
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Install pkgconfig
+        shell: bash
+        run: choco install pkgconfiglite
       - name: Compile
         shell: bash
         run: |
