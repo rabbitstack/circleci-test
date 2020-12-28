@@ -1,7 +1,7 @@
 prefix=C:/vcpkg/installed/x86-windows
 exec_prefix=${prefix}
 libdir=${exec_prefix}/lib
-includedir=${prefix}/include/yara
+includedir=${prefix}/include
 
 Name: yara
 Description: YARA library
