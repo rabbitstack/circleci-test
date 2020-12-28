@@ -47,9 +47,9 @@ jobs:
       - name: Check goyara
         shell: bash
         run: |
+          export PKG_CONFIG_PATH=$GITHUB_WORKSPACE/pkg-config
           export PATH=/c/msys64/mingw64/bin:$PATH
-          echo $GITHUB_WORKSPACE
-          export PKG_CONFIG_PATH=$GITHUB_WORKSPACE
+          ls -l $GITHUB_WORKSPACE
           git clone https://github.com/hillu/go-yara.git
           cd go-yara
           go build -ldflags '-extldflags "-static"' -tags yara_static -o simple-yara-w64.exe ./_examples/simple-yara
