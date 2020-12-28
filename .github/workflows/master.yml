@@ -47,6 +47,7 @@ jobs:
           vcpkg install yara
       - name: Check goyara
         shell: bash
+        run: |
           export PATH=/c/Strawberry/perl/bin:$PATH
           git clone https://github.com/hillu/go-yara.git
           cd go-yara
