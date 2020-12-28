@@ -49,6 +49,7 @@ jobs:
         shell: bash
         run: |
           export PATH=/c/Strawberry/perl/bin:$PATH
+          export PKG_CONFIG_PATH=$(pwd)
           git clone https://github.com/hillu/go-yara.git
           cd go-yara
           go build -ldflags '-extldflags "-static"' -tags yara_static -o simple-yara-w64.exe ./_examples/simple-yara
