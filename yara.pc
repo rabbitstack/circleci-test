@@ -8,5 +8,5 @@ Description: YARA library
 URL: https://virustotal.github.io/yara/
 Requires.private: 
 Cflags: -I${includedir}
-Libs: -L${libdir} -lyara
+Libs: -L${libdir} -l:libyara.lib
 Libs.private:  
