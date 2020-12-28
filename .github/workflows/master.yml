@@ -47,8 +47,7 @@ jobs:
           ./bootstrap-vcpkg.sh
           ./vcpkg integrate install
           vcpkg install yara
-          ls -l $GITHUB_WORKSPACE
-          ls -l $GITHUB_WORKSPACE/vcpkg
+          ls -lR $GITHUB_WORKSPACE/vcpkg/installed
 #       - name: Compile
 #         shell: bash
 #         run: |
