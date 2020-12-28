@@ -44,21 +44,20 @@ jobs:
         run: |
           vcpkg integrate install
           vcpkg install yara
-          ls -lR C:/vcpkg/installed
-      - name: Check goyara
-        shell: bash
-        run: |
-          export PATH="c/Strawberry/perl/bin:$PATH"
-          export PKG_CONFIG_PATH=$(pwd)
-          git clone https://github.com/hillu/go-yara.git
-          cd go-yara
-          go build -ldflags '-extldflags "-static"' -tags yara_static -o simple-yara-w64.exe ./_examples/simple-yara
-#       - name: Compile
+#       - name: Check goyara
 #         shell: bash
 #         run: |
 #           export PATH="c/Strawberry/perl/bin:$PATH"
 #           export PKG_CONFIG_PATH=$(pwd)
-#           ln -s C:/hostedtoolcache/windows/Python/3.7.9/x64 C:/Python37
-#           go build -ldflags "-s -w -X main.version=$VERSION -X main.commit=$GITHUB_SHA" -o main.exe main.go
-#           ./main.exe
+#           git clone https://github.com/hillu/go-yara.git
+#           cd go-yara
+#           go build -ldflags '-extldflags "-static"' -tags yara_static -o simple-yara-w64.exe ./_examples/simple-yara
+      - name: Compile
+        shell: bash
+        run: |
+          export PATH="c/Strawberry/perl/bin:$PATH"
+          export PKG_CONFIG_PATH=$(pwd)
+          ln -s C:/hostedtoolcache/windows/Python/3.7.9/x64 C:/Python37
+          go build -ldflags "-s -w -X main.version=$VERSION -X main.commit=$GITHUB_SHA" -o main.exe main.go
+          ./main.exe
           
