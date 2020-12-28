@@ -44,18 +44,17 @@ jobs:
         run: |
           vcpkg integrate install
           vcpkg install yara
-      - name: Check goyara
-        shell: bash
-        run: |
-          export PATH=/c/Strawberry/perl/bin:$PATH
-          export PKG_CONFIG_PATH=$(pwd)
-          git clone https://github.com/hillu/go-yara.git
-          cd go-yara
-          go build -ldflags '-extldflags "-static"' -tags yara_static -o simple-yara-w64.exe ./_examples/simple-yara
+#       - name: Check goyara
+#         shell: bash
+#         run: |
+#           export PATH=/c/Strawberry/perl/bin:$PATH
+#           export PKG_CONFIG_PATH=$(pwd)
+#           git clone https://github.com/hillu/go-yara.git
+#           cd go-yara
+#           go build -ldflags '-extldflags "-static"' -tags yara_static -o simple-yara-w64.exe ./_examples/simple-yara
       - name: Compile
         shell: bash
         run: |
-          export PERL5LIB=/c/Strawberry/perl/vendor/lib:/c/Strawberry/perl/site/lib
           export PATH=/c/Strawberry/perl/bin:$PATH
           export PKG_CONFIG_PATH=$(pwd)
           ln -s C:/hostedtoolcache/windows/Python/3.7.9/x64 C:/Python37
