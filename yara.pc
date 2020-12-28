@@ -7,5 +7,5 @@ Name: yara
 Description: YARA library
 URL: https://virustotal.github.io/yara/
 Libs: -L${libdir} -lyara
-Libs.private: -lyara
+Libs.private: ${libdir}/libyara.a
 Cflags: -I${includedir}
