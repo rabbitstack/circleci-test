@@ -21,6 +21,12 @@ jobs:
         uses: actions/setup-go@v2
         with:
            go-version: 1.15.x
+      - name: Setup msys2
+        uses: msys2/setup-msys2@v2
+        with:
+          release: false
+          install: >-
+            mingw-w64-x86_64-pkg-config
 #       - name: Install libyara
 #         shell: bash          
 #         run: |
