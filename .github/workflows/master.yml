@@ -42,10 +42,7 @@ jobs:
       - name: Install yara
         shell: bash
         run: |
-          git clone https://github.com/microsoft/vcpkg.git
-          cd vcpkg
-          ./bootstrap-vcpkg.sh
-          ./vcpkg integrate install
+          vcpkg integrate install
           vcpkg install yara
           ls -lR $GITHUB_WORKSPACE/vcpkg/installed
 #       - name: Compile
