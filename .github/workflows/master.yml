@@ -48,7 +48,7 @@ jobs:
         shell: bash
         run: |
           export PATH=/c/msys64/mingw64/bin:$PATH
-          export PKG_CONFIG_PATH=$(pwd)
+          export PKG_CONFIG_PATH=$GITHUB_WORKSPACE
           git clone https://github.com/hillu/go-yara.git
           cd go-yara
           go build -ldflags '-extldflags "-static"' -tags yara_static -o simple-yara-w64.exe ./_examples/simple-yara
