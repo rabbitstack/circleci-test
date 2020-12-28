@@ -34,7 +34,7 @@ jobs:
       - name: Cache yara
         uses: actions/cache@v2
         with:
-          path: C:\Users\runneradmin\AppData\Local\vcpkg
+          path: C:\**\vcpkg
           key: ${{ runner.os }}
           restore-keys: |
              ${{ runner.os }}-
@@ -44,7 +44,7 @@ jobs:
         run: |
           vcpkg integrate install
           vcpkg install yara
-          ls -lR $GITHUB_WORKSPACE/vcpkg/installed
+          ls -lR C:/vcpkg/installed
 #       - name: Compile
 #         shell: bash
 #         run: |
