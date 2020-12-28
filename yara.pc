@@ -1,0 +1,10 @@
+prefix=C:/vcpkg/installed/x86-windows
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include/yara
+
+Name: yara
+Description: YARA library
+URL: https://virustotal.github.io/yara/
+Libs: -L${libdir} -lyara
+Cflags: -I${includedir}
