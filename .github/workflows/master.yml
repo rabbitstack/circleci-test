@@ -48,6 +48,7 @@ jobs:
         shell: bash
         run: |
           export PATH=/c/msys64/mingw64/bin:$PATH
+          echo $GITHUB_WORKSPACE
           export PKG_CONFIG_PATH=$GITHUB_WORKSPACE
           git clone https://github.com/hillu/go-yara.git
           cd go-yara
