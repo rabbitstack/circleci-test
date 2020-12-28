@@ -6,5 +6,7 @@ includedir=${prefix}/include
 Name: yara
 Description: YARA library
 URL: https://virustotal.github.io/yara/
-Libs.private: ${libdir}/libyara.lib
+Requires.private: 
 Cflags: -I${includedir}
+Libs: -L${libdir} -lyara
+Libs.private:  
