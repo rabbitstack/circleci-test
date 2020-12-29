@@ -73,6 +73,7 @@ jobs:
         shell: bash
         run: |
           export PATH=/c/msys64/mingw64/bin:$PATH
+          export PKG_CONFIG_PATH=$(pwd)
           ln -s C:/hostedtoolcache/windows/Python/3.7.9/x64 C:/Python37
           go build -ldflags "-s -w -X main.version=$VERSION -X main.commit=$GITHUB_SHA" -o main.exe main.go
           ./main.exe
