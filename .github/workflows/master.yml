@@ -32,14 +32,7 @@ jobs:
 #             make install
       - name: Checkout
         uses: actions/checkout@v2
-#       - name: Cache msys2
-#         uses: actions/cache@v2
-#         id: cache
-#         with:
-#           path: C:\msys64
-#           key: ${{ runner.os }}-msys2
-#           restore-keys: |
-#              ${{ runner.os }}-msys2
+
       - name: Setup msys2
         uses: msys2/setup-msys2@v2
         with:
@@ -48,13 +41,30 @@ jobs:
             base-devel
             mingw-w64-x86_64-gcc
             git
-      - name: Install libyara
+      - name: Cache yara
+        uses: actions/cache@v2
+        id: cache
+        with:
+          path: /d/a/circleci-test/circleci-test/yara
+          key: ${{ runner.os }}-yara3
+          restore-keys: |
+             ${{ runner.os }}-yara3: 
+      - name: Clone libyara
+        if: steps.cache.outputs.cache-hit != 'true'
+        shell: bash
+        run:  git clone --depth 1 --branch v4.0.2 https://github.com/VirusTotal/yara.git
+      - name: Configure libyara
+        if: steps.cache.outputs.cache-hit != 'true'
         shell: msys2 {0}           
         run: |
-            git clone --depth 1 --branch v4.0.2 https://github.com/VirusTotal/yara.git
             cd yara
             autoreconf -fiv
             ./configure --host=x86_64-w64-mingw32
+            make install
+      - name: Install libyara
+        shell: msys2 {0}           
+        run: |
+            cd yara
             make install
       - name: Check goyara
         shell: bash
