@@ -56,7 +56,6 @@ jobs:
       - name: Install libyara
         shell: msys2 {0}           
         run: |
-            ls -lR c:/msys64/mingw64/lib/
             git clone --depth 1 --branch v4.0.2 https://github.com/VirusTotal/yara.git
             cd yara
             autoreconf -fiv
@@ -65,6 +64,7 @@ jobs:
       - name: Check goyara
         shell: bash
         run: |
+          ls -l c:/msys64/mingw64/lib/
           export PATH=/c/Strawberry/perl/bin:$PATH
           export PKG_CONFIG_PATH=$(pwd)
           git clone https://github.com/hillu/go-yara.git
