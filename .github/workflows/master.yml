@@ -64,7 +64,7 @@ jobs:
       - name: Check goyara
         shell: bash
         run: |
-          export PATH=/c:/msys64/mingw64/bin:$PATH
+          export PATH=/c/msys64/mingw64/bin:$PATH
           export PKG_CONFIG_PATH=$(pwd)
           git clone https://github.com/hillu/go-yara.git
           cd go-yara
