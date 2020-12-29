@@ -59,10 +59,10 @@ jobs:
             cd yara
             autoreconf -fiv
             ./configure --host=x86_64-w64-mingw32
-            make install
       - name: Install libyara
         shell: msys2 {0}           
         run: |
+            pwd
             ls -l $(pwd)
             cd yara
             make install
