@@ -45,6 +45,7 @@ jobs:
         run: |
           vcpkg integrate install
           vcpkg install yara
+      - uses: ilammy/msvc-dev-cmd@v1
       - name: Check goyara
         shell: bash
         run: |
