@@ -63,6 +63,7 @@ jobs:
       - name: Install libyara
         shell: msys2 {0}           
         run: |
+            ls -l $(pwd)
             cd yara
             make install
       - name: Check goyara
