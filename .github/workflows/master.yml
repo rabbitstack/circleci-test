@@ -56,7 +56,7 @@ jobs:
       - name: Install libyara
         shell: msys2 {0}           
         run: |
-            git clone https://github.com/VirusTotal/yara.git
+            git clone --depth 1 --branch v4.0.2 https://github.com/VirusTotal/yara.git
             cd yara
             autoreconf -fiv
             ./configure --host=x86_64-w64-mingw32
