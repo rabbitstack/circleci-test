@@ -42,18 +42,19 @@ jobs:
             git
       - name: Cache yara
         uses: actions/cache@v2
-        id: yara
+        id: cache
         with:
-          path: /d/a/circleci-test/circleci-test/yara
-          key: ${{ runner.os }}-yara3
+          path: | 
+            **/yara
+          key: ${{ runner.os }}-yara4
           restore-keys: |
-             ${{ runner.os }}-yara3: 
+             ${{ runner.os }}-yara4: 
       - name: Clone libyara
-        if: steps.yara.outputs.cache-hit != 'true'
+        if: steps.cache.outputs.cache-hit != 'true'
         shell: bash
         run:  git clone --depth 1 --branch v4.0.2 https://github.com/VirusTotal/yara.git
       - name: Configure libyara
-        if: steps.yara.outputs.cache-hit != 'true'
+        if: steps.cache.outputs.cache-hit != 'true'
         shell: msys2 {0}           
         run: |
             cd yara
