@@ -1,4 +1,4 @@
-prefix=C:/vcpkg/installed/x86-windows
+prefix=c:/msys64/mingw64
 exec_prefix=${prefix}
 libdir=${exec_prefix}/lib
 includedir=${prefix}/include
