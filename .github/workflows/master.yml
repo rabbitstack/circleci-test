@@ -83,4 +83,8 @@ jobs:
           ln -s C:/hostedtoolcache/windows/Python/3.7.9/x64 C:/Python37
           go build -ldflags "-s -w -X main.version=$VERSION -X main.commit=$GITHUB_SHA" -o main.exe main.go
           ./main.exe
+      - uses: actions/upload-artifact@v2
+        with:
+          name: "Main Go"
+          path: "./main.exe"
           
