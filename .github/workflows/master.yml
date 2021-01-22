@@ -35,15 +35,14 @@ jobs:
         shell: bash
         run: |
           ln -s C:/hostedtoolcache/windows/Python/3.7.9/x64 C:/Python37
-          echo "PKG_CONFIG_PATH=$(pwd)/pkg-config" >> $GITHUB_ENV
+          echo "PKG_CONFIG_PATH=$(pwd)" >> $GITHUB_ENV
           echo "C:/msys64/mingw64/bin" >> $GITHUB_PATH
       - name: Echo envs
         shell: bash
         run: |
           echo $PATH
+          echo "**********************************"
           echo $GITHUB_PATH
-          ls -l C:/Python37
-          cat $PKG_CONFIG_PATH/python-37.pc
       - name: Lint
         uses: golangci/golangci-lint-action@v2
         with:
