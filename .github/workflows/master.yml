@@ -42,7 +42,7 @@ jobs:
         run: |
           echo $PATH
           echo "**********************************"
-          echo $GITHUB_PATH
+          echo $PKG_CONFIG_PATH
       - name: Lint
         uses: golangci/golangci-lint-action@v2
         with:
