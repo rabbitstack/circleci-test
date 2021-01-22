@@ -14,77 +14,112 @@ env:
   VERSION: 1.0.0
            
 jobs:
-  build:
-      runs-on: windows-latest
-      steps:
+  lint:
+    runs-on: windows-latest
+    continue-on-error: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Install Go
         uses: actions/setup-go@v2
         with:
            go-version: 1.15.x
-   
-#       - name: Install libyara
-#         shell: bash          
-#         run: |
-#             git clone https://github.com/VirusTotal/yara.git
-#             cd yara
-#             ./configure
-#             make
-#             make install
-      - name: Checkout
-        uses: actions/checkout@v2
       - name: Setup msys2
         uses: msys2/setup-msys2@v2
         with:
-          release: false
-          install: >-
-            base-devel
-            mingw-w64-x86_64-gcc
-            git
-      - name: Cache yara
-        uses: actions/cache@v2
-        id: cache
-        with:
-          path: | 
-            **/yara
-          key: ${{ runner.os }}-yara4
-          restore-keys: |
-             ${{ runner.os }}-yara4: 
-      - name: Clone libyara
-        if: steps.cache.outputs.cache-hit != 'true'
-        shell: bash
-        run:  git clone --depth 1 --branch v4.0.2 https://github.com/VirusTotal/yara.git
-      - name: Configure libyara
-        if: steps.cache.outputs.cache-hit != 'true'
-        shell: msys2 {0}           
-        run: |
-            cd yara
-            autoreconf -fiv
-            ./configure --host=x86_64-w64-mingw32
-      - name: Install libyara
-        shell: msys2 {0}           
-        run: |
-            pwd
-            ls -l $(pwd)
-            cd yara
-            make install
-      - name: Check goyara
+         release: false
+         install: >-
+           base-devel
+           mingw-w64-x86_64-gcc
+      - name: Make Python symlink
         shell: bash
         run: |
-          export PATH=/c/msys64/mingw64/bin:$PATH
-          git clone https://github.com/hillu/go-yara.git
-          cd go-yara
-          go build -ldflags '-extldflags "-static"' -tags yara_static -o simple-yara-w64.exe ./_examples/simple-yara
-          ./simple-yara-w64.exe -h
-      - name: Compile
-        shell: bash
-        run: |
-          export PATH=/c/msys64/mingw64/bin:$PATH
-          export PKG_CONFIG_PATH=$(pwd)
           ln -s C:/hostedtoolcache/windows/Python/3.7.9/x64 C:/Python37
-          go build -ldflags "-s -w -X main.version=$VERSION -X main.commit=$GITHUB_SHA" -o main.exe main.go
-          ./main.exe
-      - uses: actions/upload-artifact@v2
+          echo "PKG_CONFIG_PATH=$(pwd)/pkg-config" >> $GITHUB_ENV
+          echo "C:/msys64/mingw64/bin" >> $GITHUB_PATH
+      - name: Echo envs
+        shell: bash
+        run: |
+          echo $PATH
+          echo $GITHUB_PATH
+          ls -l C:/Python37
+          cat $PKG_CONFIG_PATH/python-37.pc
+      - name: Lint
+        uses: golangci/golangci-lint-action@v2
         with:
-          name: "Main Go"
-          path: "./main.exe"
+          version: v1.29
+     
+#   build:
+#       runs-on: windows-latest
+#       steps:
+#       - name: Install Go
+#         uses: actions/setup-go@v2
+#         with:
+#            go-version: 1.15.x
+   
+# #       - name: Install libyara
+# #         shell: bash          
+# #         run: |
+# #             git clone https://github.com/VirusTotal/yara.git
+# #             cd yara
+# #             ./configure
+# #             make
+# #             make install
+#       - name: Checkout
+#         uses: actions/checkout@v2
+#       - name: Setup msys2
+#         uses: msys2/setup-msys2@v2
+#         with:
+#           release: false
+#           install: >-
+#             base-devel
+#             mingw-w64-x86_64-gcc
+#             git
+#       - name: Cache yara
+#         uses: actions/cache@v2
+#         id: cache
+#         with:
+#           path: | 
+#             **/yara
+#           key: ${{ runner.os }}-yara4
+#           restore-keys: |
+#              ${{ runner.os }}-yara4: 
+#       - name: Clone libyara
+#         if: steps.cache.outputs.cache-hit != 'true'
+#         shell: bash
+#         run:  git clone --depth 1 --branch v4.0.2 https://github.com/VirusTotal/yara.git
+#       - name: Configure libyara
+#         if: steps.cache.outputs.cache-hit != 'true'
+#         shell: msys2 {0}           
+#         run: |
+#             cd yara
+#             autoreconf -fiv
+#             ./configure --host=x86_64-w64-mingw32
+#       - name: Install libyara
+#         shell: msys2 {0}           
+#         run: |
+#             pwd
+#             ls -l $(pwd)
+#             cd yara
+#             make install
+#       - name: Check goyara
+#         shell: bash
+#         run: |
+#           export PATH=/c/msys64/mingw64/bin:$PATH
+#           git clone https://github.com/hillu/go-yara.git
+#           cd go-yara
+#           go build -ldflags '-extldflags "-static"' -tags yara_static -o simple-yara-w64.exe ./_examples/simple-yara
+#           ./simple-yara-w64.exe -h
+#       - name: Compile
+#         shell: bash
+#         run: |
+#           export PATH=/c/msys64/mingw64/bin:$PATH
+#           export PKG_CONFIG_PATH=$(pwd)
+#           ln -s C:/hostedtoolcache/windows/Python/3.7.9/x64 C:/Python37
+#           go build -ldflags "-s -w -X main.version=$VERSION -X main.commit=$GITHUB_SHA" -o main.exe main.go
+#           ./main.exe
+#       - uses: actions/upload-artifact@v2
+#         with:
+#           name: "Main Go"
+#           path: "./main.exe"
           
