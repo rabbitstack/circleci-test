@@ -43,6 +43,10 @@ jobs:
           echo $PATH
           echo "**********************************"
           echo $PKG_CONFIG_PATH
+      - name: Build
+        shell: bash
+        run: |
+          go build main.go
       - name: Lint
         uses: golangci/golangci-lint-action@v2
         with:
