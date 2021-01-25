@@ -41,7 +41,7 @@ jobs:
            export PATH=/c/msys64/mingw64/bin:$PATH
            export PKG_CONFIG_PATH=$(pwd)
            ln -s C:/hostedtoolcache/windows/Python/3.7.9/x64 C:/Python37
-           $(pwd)/go/bin/golangci-lint run
+           $(HOME)/go/bin/golangci-lint run
      
 #   build:
 #       runs-on: windows-latest
