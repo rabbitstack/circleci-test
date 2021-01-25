@@ -31,10 +31,6 @@ jobs:
          install: >-
            base-devel
            mingw-w64-x86_64-gcc
-      - name: Build
-        shell: bash
-        run: |
-          go build main.go
       - name: Install golangci-lint
         shell: bash
         run: |
