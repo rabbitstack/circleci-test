@@ -36,14 +36,12 @@ jobs:
         run: |
           curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.35.2
       - name: Lint
-        shell: cmd
+        shell: bash
         run: |
-           setx path "C:/msys64/mingw64/bin;%path%"
-           set PKG_CONFIG_PATH=%GITHUB_WORKSPACE%
-           mklink C:/hostedtoolcache/windows/Python/3.7.9/x64 C:/Python37
-           echo %PATH%
-           echo %PKG_CONFIG_PATH%
-           make lint
+           export PATH="/c/msys64/mingw64/bin:$PATH"
+           export PKG_CONFIG_PATH=$GITHUB_WORKSPACE
+           ln -s C:/hostedtoolcache/windows/Python/3.7.9/x64 C:/Python37
+           cmd.exe /C "make lint"
      
 #   build:
 #       runs-on: windows-latest
