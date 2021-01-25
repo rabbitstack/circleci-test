@@ -41,6 +41,8 @@ jobs:
            setx path "C:/msys64/mingw64/bin;%path%"
            set PKG_CONFIG_PATH=%GITHUB_WORKSPACE%
            mklink C:/hostedtoolcache/windows/Python/3.7.9/x64 C:/Python37
+           echo %PATH%
+           echo %PKG_CONFIG_PATH%
            make lint
      
 #   build:
