@@ -12,6 +12,10 @@ if "%~1"=="clean" goto clean
 go build -ldflags "-s -w -X main.version=%VERSION% -X main.commit=%GITHUB_SHA%" -o main.exe main.go
 goto :EOF
 
+:lint
+%USERPROFILE%\go\bin\golangci-lint run
+goto :EOF
+
 :pkg
 echo Downloading python...
 powershell -Command "$progressPreference = 'silentlyContinue'; Invoke-WebRequest https://www.python.org/ftp/python/3.9.0/python-3.9.0-embed-amd64.zip -OutFile c:\python.zip"
