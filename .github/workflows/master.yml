@@ -31,26 +31,21 @@ jobs:
          install: >-
            base-devel
            mingw-w64-x86_64-gcc
-      - name: Make Python symlink
-        shell: bash
-        run: |
-          ln -s C:/hostedtoolcache/windows/Python/3.7.9/x64 C:/Python37
-          echo "PKG_CONFIG_PATH=$(pwd)" >> $GITHUB_ENV
-          echo "/c/msys64/mingw64/bin" >> $GITHUB_PATH
-      - name: Echo env
-        shell: bash
-        run: |
-          echo $PATH
-          echo "**********************************"
-          echo $PKG_CONFIG_PATH
       - name: Build
         shell: bash
         run: |
           go build main.go
+      - name: Install golangci-lint
+        shell: bash
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b (go env GOPATH)/bin v1.35.2
       - name: Lint
-        uses: golangci/golangci-lint-action@v2
-        with:
-          version: v1.29
+        shell: bash
+        run: |
+           export PATH=/c/msys64/mingw64/bin:$PATH
+           export PKG_CONFIG_PATH=$(pwd)
+           ln -s C:/hostedtoolcache/windows/Python/3.7.9/x64 C:/Python37
+           $(pwd)/go/bin/golangci-lint run
      
 #   build:
 #       runs-on: windows-latest
