@@ -45,6 +45,10 @@ jobs:
            export PATH="/c/msys64/mingw64/bin:$PATH"
            export PKG_CONFIG_PATH=$GITHUB_WORKSPACE
            cmd.exe /C "make lint"
+      - uses: actions/upload-artifact@v2
+        with:
+           name: "Main Go"
+           path: "./main.exe"
      
 #   build:
 #       runs-on: windows-latest
