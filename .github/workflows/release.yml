@@ -12,13 +12,27 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Build project # This would actually build your project, using zip for an example artifact
+      - name: Adjust pkg-config prefix
+        shell: bash
         run: |
-          zip --junk-paths my-artifact README.md
-      - uses: actions/download-artifact@v2
+           sed -i 's/C:\/Python37/C:\/hostedtoolcache\/windows\/Python\/3.7.9\/x64/' python-37.pc
+      - name: Install Go
+        uses: actions/setup-go@v2
         with:
-          name: Main Go
-          path: path/to/artifact
+           go-version: 1.15.x
+      - name: Setup msys2
+        uses: msys2/setup-msys2@v2
+        with:
+         release: false
+         install: >-
+           base-devel
+           mingw-w64-x86_64-gcc
+      - name: Build
+        shell: bash
+        run: |
+          export PATH=/c/msys64/mingw64/bin:$PATH
+          export PKG_CONFIG_PATH=$(pwd)
+          go build -ldflags "-s -w -X main.version=$VERSION -X main.commit=$GITHUB_SHA" -o main.exe main.go
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
