@@ -33,16 +33,6 @@ jobs:
           export PATH=/c/msys64/mingw64/bin:$PATH
           export PKG_CONFIG_PATH=$(pwd)
           go build -ldflags "-s -w -X main.version=$VERSION -X main.commit=$GITHUB_SHA" -o main.exe main.go
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          draft: false
-          prerelease: false
       - name: Release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
