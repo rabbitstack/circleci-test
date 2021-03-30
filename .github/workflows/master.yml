@@ -35,16 +35,12 @@ jobs:
          install: >-
            base-devel
            mingw-w64-x86_64-gcc
-      - name: Install golangci-lint
+      - name: Build
         shell: bash
         run: |
-          curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.35.2
-      - name: Lint
-        shell: bash
-        run: |
-           export PATH="/c/msys64/mingw64/bin:$PATH"
-           export PKG_CONFIG_PATH=$GITHUB_WORKSPACE
-           cmd.exe /C "make lint"
+          export PATH=/c/msys64/mingw64/bin:$PATH
+          export PKG_CONFIG_PATH=$(pwd)
+          go build -ldflags "-s -w -X main.version=$VERSION -X main.commit=$GITHUB_SHA" -o main.exe main.go
       - uses: actions/upload-artifact@v2
         with:
            name: "Main Go"
