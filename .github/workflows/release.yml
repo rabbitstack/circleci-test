@@ -13,6 +13,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Get the version
+        shell: bash
         id: get_version
         run: echo ::set-output name=VERSION::$(echo $GITHUB_REF | cut -d / -f 3)
       - name: Adjust pkg-config prefix
@@ -44,3 +45,5 @@ jobs:
         with:
           files: |
              main.exe
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
