@@ -15,7 +15,7 @@ jobs:
       - name: Get the version
         shell: bash
         id: get_version
-        run: echo ::set-output name=VERSION::$(echo $GITHUB_REF | cut -d / -f 3)
+        run: echo ::set-output name=VERSION::$(echo $GITHUB_REF | cut -d / -f 3 | cut -c2-)
       - name: Adjust pkg-config prefix
         shell: bash
         run: |
