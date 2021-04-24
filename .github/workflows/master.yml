@@ -24,6 +24,7 @@ jobs:
         shell: bash
         run: |
            sed -i 's/C:\/Python37/C:\/hostedtoolcache\/windows\/Python\/3.7.9\/x64/' python-37.pc
+           ls -lR C:/hostedtoolcache/windows/Python/3.7.9/x64/
       - name: Install Go
         uses: actions/setup-go@v2
         with:
